@@ -38,13 +38,13 @@ SCOPE_LIST = [
                 'user-read-recently-played'
                 ]
 
-sp = spotipy.Spotify(auth_manager = SpotifyOAuth(scope=SCOPE_LIST))
+sp = spotipy.Spotify(auth_manager = SpotifyOAuth(scope=SCOPE_LIST, client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET))
 
 user_id = sp.current_user()['id']
 
-# # Testing (Make sure to be playing something on your Spotify Account)
-# current = sp.current_playback()
-# print("Currently playing " + current['item']['name'] + " from the album " + current['item']['album']['name'] + " by " + current['item']['album']['artists'][0]['name'])
+# Testing (Make sure to be playing something on your Spotify Account)
+current = sp.current_playback()
+print("Currently playing " + current['item']['name'] + " from the album " + current['item']['album']['name'] + " by " + current['item']['album']['artists'][0]['name'])
 
 
 
