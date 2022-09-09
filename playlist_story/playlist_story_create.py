@@ -1,3 +1,4 @@
+from sys import set_coroutine_origin_tracking_depth
 import main
 from spotipy import exceptions
 
@@ -69,8 +70,10 @@ def create_playlist_story():
     previousWords = []
     lostWords = []
     foundWords = {}
+    skippedWords = []
     pointer = 0
     while pointer < len(words):
+        skip = False
         if len(previousWords) == 5:
             pointer -= 4
             lostWords.append(previousWords[0])
@@ -81,15 +84,21 @@ def create_playlist_story():
         print(phraseToSearch)
 
         # Check if the word has been seen before
-        if phraseToSearch not in foundWords.keys():
-            searchedWord = search_for_word(phraseToSearch)
-        else:
+        if phraseToSearch in foundWords.keys():
             searchedWord = foundWords[phraseToSearch]
+        elif phraseToSearch in skippedWords:
+            skip = True
+        else:
+            searchedWord = search_for_word(phraseToSearch)
+
+        
         if searchedWord:
             playlistSongs.append(searchedWord[1])
             print("found")
             previousWords = []
             foundWords[searchedWord[0]] = searchedWord
+        elif skip:
+            print("not found before")
         else:
             print("not found")
         pointer += 1
