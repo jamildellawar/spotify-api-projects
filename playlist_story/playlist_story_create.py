@@ -3,6 +3,12 @@ from spotipy import exceptions
 
 
 def get_phrase():
+    """
+    Cleans the phrase so that it can be searched properly.
+
+    Returns:
+        phrase (String): cleaned phrased removed of punctuation for searching
+    """
     phrase = input("Please type what you'd like the playlist to say: \n").\
         replace("'","'").\
         replace(".", "").\
@@ -10,11 +16,26 @@ def get_phrase():
     return phrase
 
 def create_playlist(playlistSongs):
+    """
+    Creates a playlist with a list of song URIs
+
+    Args:
+        playlistSongs (List<String>): list of song URI strings
+    """
     main.sp.user_playlist_create(main.user_id, "Playlist Story", public=False, description="Created by @jamildellawar on Instagram.")
     newPlaylistId = main.sp.user_playlists(user=main.user_id)['items'][0]['id']
     main.sp.playlist_add_items(newPlaylistId, playlistSongs)
 
 def search_for_word(word):
+    """
+    Searches for a word with Spotify API
+
+    Args:
+        word (string): word to be searched
+
+    Returns:
+        (songName, songURI) (tuple): returns a tuple of the song name and URI if the word is found. Otherwise it returns None
+    """
     try:
         counter = 0
         while True:
@@ -38,6 +59,10 @@ def search_for_word(word):
             return None
 
 def create_playlist_story():
+    """
+    Creates a playlist with song names being a message that you want to type.
+    Example: 
+    """
     phrase = get_phrase()
     words = phrase.split(" ")
     playlistSongs = []
@@ -54,6 +79,8 @@ def create_playlist_story():
         previousWords.append(words[pointer])
         phraseToSearch = " ".join(previousWords)
         print(phraseToSearch)
+
+        # Check if the word has been seen before
         if phraseToSearch not in foundWords.keys():
             searchedWord = search_for_word(phraseToSearch)
         else:
