@@ -1,8 +1,4 @@
-from re import A
-from shutil import which
-# import main
-import helper_functions as hf
-from itertools import permutations
+
 
 def defineVariations():
     """
