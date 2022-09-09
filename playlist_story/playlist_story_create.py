@@ -12,7 +12,7 @@ def get_phrase():
     phrase = input("Please type what you'd like the playlist to say: \n").\
         replace("'","'").\
         replace(".", "").\
-        replace(",", "")
+        replace(",", "").lower()
     return phrase
 
 def create_playlist(playlistSongs):
@@ -42,7 +42,7 @@ def search_for_word(word):
             searches = main.sp.search(word, type="track", market="US", offset=counter, limit=50)['tracks']['items']
             counter += 50
             for track in searches:
-                trackName = track['name'].replace("'","'").replace(".", "").replace(",", "")
+                trackName = track['name'].replace("'","'").replace(".", "").replace(",", "").lower()
                 if trackName == word:
                     return (track['name'], track['uri'])
     except exceptions.SpotifyException:
@@ -52,7 +52,7 @@ def search_for_word(word):
                 searches = main.sp.search(f"track:{word}", type="track", market="US", offset=counter, limit=50)['tracks']['items']
                 counter += 50
                 for track in searches:
-                    trackName = track['name'].replace("'","'").replace(".", "").replace(",", "")
+                    trackName = track['name'].replace("'","'").replace(".", "").replace(",", "").lower()
                     if trackName == word:
                         return (track['name'], track['uri'])
         except exceptions.SpotifyException:
