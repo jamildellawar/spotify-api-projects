@@ -103,6 +103,10 @@ def create_playlist_story():
             print("not found")
         pointer += 1
 
+    for word in previousWords:
+        playlistSongs.append(" ")
+        lostWords.append(word)
+
     lostSongCounter = 0
     for song in playlistSongs:
         if song == " ":
