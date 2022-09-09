@@ -1,4 +1,3 @@
-from sys import set_coroutine_origin_tracking_depth
 import main
 from spotipy import exceptions
 
