@@ -61,7 +61,7 @@ def search_for_word(word):
 def create_playlist_story():
     """
     Creates a playlist with song names being a message that you want to type.
-    Example: 
+    Example: https://open.spotify.com/playlist/2llHjAwvcmdlxDz3x7xUY8?si=717f626707bb45fd
     """
     phrase = get_phrase()
     words = phrase.split(" ")
