@@ -20,8 +20,6 @@ def find_time_left(end_hour, end_minute):
 
     time_left -= int(current_time[2])
 
-    # To give a 15 second buffer
-    time_left += 15
     return time_left
 
 
